@@ -80,11 +80,11 @@ export function generateUniversalLink(config, options) {
   const { host, pathKey } = universal;
   const { path, param } = config;
   const query = typeof param !== 'undefined'
-    ? Object.keys(param).map(key => `${key}=${param[key]}`).join('&')
+    ? Object.keys(param).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(param[key])}`).join('&')
     : '';
   const urlQuery = query ? `&${query}` : '';
 
-  return `https://${host}?${pathKey}=${path}${urlQuery}`;
+  return `https://${host}?${encodeURIComponent(pathKey)}=${encodeURIComponent(path + urlQuery)}`;
 }
 
 /**
